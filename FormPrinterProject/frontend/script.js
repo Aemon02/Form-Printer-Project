@@ -78,7 +78,7 @@ function displayRowDetails(row) {
     // const backButton = document.createElement('button');
     // backButton.textContent = 'กลับไปที่ตารางข้อมูล';
     // backButton.onclick = loadCSVData;
-    // formContainer.appendChild(backButton);
+    formContainer.appendChild(backButton);
 }
 
 loadCSVData()
