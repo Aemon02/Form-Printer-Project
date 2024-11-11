@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Card</title>
+    <style>
+        /* ตั้งค่าขนาดกระดาษ A4 */
+        @page {
+            size: A4;
+            margin: 20mm;
+        }
+
+        /* ตั้งค่าการจัดหน้า */
+        body {
+            /* font-family: Arial, sans-serif; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 210mm;
+            border: 1px solid #000;
+            padding: 20px;
+        }
+
+        /* ตั้งค่าการจัดเรียงข้อมูลในตาราง */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #000;
+            padding: 10px;
+            text-align: center;
+        }
+
+
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <table>
+            <tr>
+                <td colspan="4" style="width: 100%; padding: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <div class="logo" style="text-align: left; font-size: 1em;">
+                            <!-- <img src="frontend\logo.jpg" alt="BUATHONG SIRISUP Logo" style="height: 40px;"> -->
+                            BUATHONG SIRISUP
+                        </div>
+                        <div class="title" style="text-align: center; font-weight: bold; font-size: 2em;">Stock Card</div>
+                        <div class="product-type" style="text-align: right; font-size: 2em;">ไม้สักแปรรูป</div>
+                    </div>
+                </td>
+            </tr>
+            <tr style="height: 100px;">
+                <th style="font-size: 1.5em; width: 25%;">ยาว (ฟุต)</th>
+                <th style="font-size: 1.5em; width: 25%;">กว้าง (นิ้ว)</th>
+                <th style="font-size: 1.5em; width: 25%;">หนา (นิ้ว)</th>
+                <th style="font-size: 1.5em; width: 25%;">จำนวน/แผ่น</th>
+            </tr>
+            <tr style="height: 150px;">
+                <td style="font-size: 3.5em; font-weight: bold;"><span id="length_detail"></span></td>
+                <td style="font-size: 3.5em; font-weight: bold;"><span id="width_detail"></span></td>
+                <td style="font-size: 3.5em; font-weight: bold;"><span id="thickness_detail"></span></td>
+                <td style="font-size: 3.5em; font-weight: bold;"><span id="amount_detail"></span></td>
+            </tr>
+            <tr style="height: 100px;">
+                <th rowspan="2">
+                    <div style="font-size: 5em;"><span id="detail_detail"></div>
+                    <div style="font-size: 2em;">เกรด</div>
+                </th>
+                <td colspan="2" style="text-align: left;">
+                    <div>รหัสสินค้า <span id="code_detail"></span></div>
+                    <div>ชื่อสินค้า <span id="list_detail"></span></div>
+                </td>
+                <td>
+                    <div style="text-align: left;">วันที่ 13/10/2024</div>
+                    <div style="text-align: left;">location </div>
+                </td>
+            </tr>
+            <tr style="height: 80px;">
+                <td colspan="3">Barcode</td>
+            </tr>
+
+        </table>
+    </div>
+
+    <script>
+        fetch('http://localhost:3200/getRowData')
+            .then(response => {
+                if (!response.ok) throw new Error('No data available');
+                return response.json();
+            })
+            .then(data => {
+                // document.getElementById('no_detail').textContent = data["no"] || 'ไม่มีข้อมูล';
+                document.getElementById('code_detail').textContent = data["code"] || 'ไม่มีข้อมูล';
+                document.getElementById('list_detail').textContent = data["list"] || 'ไม่มีข้อมูล';
+                document.getElementById('detail_detail').textContent = data["detail"] || 'ไม่มีข้อมูล';
+                document.getElementById('length_detail').textContent = data["length"] || 'ไม่มีข้อมูล';
+                document.getElementById('width_detail').textContent = data["width"] || 'ไม่มีข้อมูล';
+                document.getElementById('thickness_detail').textContent = data["thickness"] || 'ไม่มีข้อมูล';
+                document.getElementById('amount_detail').textContent = data["amount"] || 'ไม่มีข้อมูล';
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+
+</body>
+
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Details</title>
+</head>
+
+<body>
+    <div>
+        <p><strong>No:</strong> <span id="No_detail"></span></p>
+        <p><strong>Code:</strong> <span id="code_detail"></span></p>
+        <p><strong>List:</strong> <span id="list_detail"></span></p>
+        <p><strong>Detail:</strong> <span id="detail_detail"></span></p>
+        <p><strong>Length:</strong> <span id="length_detail"></span></p>
+        <p><strong>Width:</strong> <span id="width_detail"></span></p>
+        <p><strong>Thickness:</strong> <span id="thickness_detail"></span></p>
+        <p><strong>Amount:</strong> <span id="amount_detail"></span></p>
+    </div>
+
+    <script>
+        fetch('http://localhost:3200/getRowData')
+            .then(response => {
+                if (!response.ok) throw new Error('No data available');
+                return response.json();
+            })
+            .then(data => {
+                document.getElementById('No_detail').textContent = data["no"] || 'ไม่มีข้อมูล';
+                document.getElementById('code_detail').textContent = data["code"] || 'ไม่มีข้อมูล';
+                document.getElementById('list_detail').textContent = data["list"] || 'ไม่มีข้อมูล';
+                document.getElementById('detail_detail').textContent = data["detail"] || 'ไม่มีข้อมูล';
+                document.getElementById('length_detail').textContent = data["length"] || 'ไม่มีข้อมูล';
+                document.getElementById('width_detail').textContent = data["width"] || 'ไม่มีข้อมูล';
+                document.getElementById('thickness_detail').textContent = data["thickness"] || 'ไม่มีข้อมูล';
+                document.getElementById('amount_detail').textContent = data["amount"] || 'ไม่มีข้อมูล';
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+
+</html> -->

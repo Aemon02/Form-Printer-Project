@@ -1,9 +1,22 @@
 function loadCSVData() {
-    fetch('http://localhost:3000/data') // แก้ไข URL ให้ตรงกับที่ Backend 
-        .then(response => response.json())
-        .then(data => displayData(data))
+    fetch('http://localhost:3200/data')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data && data.length > 0) {
+                displayData(data); 
+            } else {
+                console.error('No data available');
+                displayData([]);
+            }
+        })
         .catch(error => console.error('Error:', error));
 }
+
 
 function displayData(data) {
     const formContainer = document.getElementById('formContainer');
@@ -30,7 +43,7 @@ function displayData(data) {
     data.forEach(row => {
         const rowElement = document.createElement('tr');
         rowElement.classList.add('data-row');
-        rowElement.addEventListener('click', () => displayRowDetails(row)); // เพิ่ม event ให้แถว
+        rowElement.addEventListener('click', () => sendRowDetailsToBackend(row)); // ส่งข้อมูลผ่าน POST เมื่อคลิกแถว
 
         Object.values(row).forEach(cellText => {
             const cell = document.createElement('td');
@@ -43,42 +56,23 @@ function displayData(data) {
     formContainer.appendChild(table);
 }
 
-// ฟังก์ชันแสดงรายละเอียดของข้อมูลในแถวที่เลือก
-function displayRowDetails(row) {
-    const formContainer = document.getElementById('formContainer');
-    formContainer.innerHTML = ''; // ล้างเนื้อหาเก่าออก
 
-    const a4Container = document.createElement('div');
-    a4Container.classList.add('a4-container');
-    
-    // สร้างหัวข้อสำหรับรายละเอียด
-    const title = document.createElement('h2');
-    title.textContent = 'รายละเอียดข้อมูล';
-    a4Container.appendChild(title);
-
-    // แบ่งข้อมูลออกเป็นข้อๆ โดยชื่อคอลัมเป็นชื่อหัวข้อ
-    Object.entries(row).forEach(([key, value]) => {
-        const detailItem = document.createElement('div');
-        detailItem.classList.add('detail-item');
-        
-        const heading = document.createElement('h3');
-        heading.textContent = key;
-        
-        const content = document.createElement('p');
-        content.textContent = value;
-        
-        detailItem.appendChild(heading);
-        detailItem.appendChild(content);
-        a4Container.appendChild(detailItem);
-    });
-
-    formContainer.appendChild(a4Container);
-
-    // ปุ่มสำหรับกลับไปหน้าตารางข้อมูล
-    // const backButton = document.createElement('button');
-    // backButton.textContent = 'กลับไปที่ตารางข้อมูล';
-    // backButton.onclick = loadCSVData;
-    // formContainer.appendChild(backButton);
+// ฟังก์ชันส่งข้อมูลแถวไปยัง backend ผ่าน POST request
+function sendRowDetailsToBackend(row) {
+    fetch('http://localhost:3200/submitData', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(row)  // ส่งข้อมูลแถวในรูปแบบ JSON
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Data successfully submitted:', data);
+        // คุณสามารถทำการ redirect หรือแสดงข้อความหลังจากส่งข้อมูลสำเร็จ
+        window.location.href = 'show.html'; // ตัวอย่างการเปลี่ยนหน้าไปยัง show.html
+    })
+    .catch(error => console.error('Error:', error));
 }
 
-loadCSVData()
+loadCSVData();
