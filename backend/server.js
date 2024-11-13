@@ -68,19 +68,18 @@ app.get('/data', (req, res) => {
 // Endpoint for receiving row data from frontend
 let lastRowData = null;
 
-app.post('/submitData', (req, res) => {
-    const rowData = req.body;
-    lastRowData = rowData;  // Store the clicked row data
-    res.json({ message: 'Data received successfully', data: rowData });
+// รับข้อมูลที่เลือกจากหน้า index.html
+app.post('/submitSelectedRows', (req, res) => {
+    selectedRows = req.body;  // เก็บข้อมูลที่เลือกใน selectedRows
+    console.log('Selected rows received:', selectedRows);  // เพิ่ม log ที่นี่
+    res.json({ message: 'Data received successfully' });
 });
 
-// Endpoint to fetch the latest clicked row data
-app.get('/getRowData', (req, res) => {
-    if (lastRowData) {
-        res.json(lastRowData);
-    } else {
-        res.status(404).json({ message: 'No data available' });
-    }
+
+// ส่งข้อมูลที่เลือกไปยังหน้า show.html
+app.get('/getSelectedRows', (req, res) => {
+    console.log("Sending selected rows:", selectedRows); // ตรวจสอบข้อมูลก่อนส่งกลับ
+    res.json(selectedRows);  // ส่งข้อมูลแถวที่เลือกไปยังหน้า show.html
 });
 
 // Start the server

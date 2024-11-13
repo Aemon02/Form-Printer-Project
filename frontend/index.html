@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ข้อมูลจาก CSV</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>อัปโหลดไฟล์ CSV</h1>
+    <input type="file" id="csvFileInput" accept=".csv" />
+    <button onclick="uploadFile()">อัปโหลดไฟล์</button>
+    <button onclick="toPrint()">พิมพ์ข้อมูลที่เลือก</button> <!-- ปุ่มพิมพ์ข้อมูลที่เลือก -->
+
+    <div>
+        <h2>ข้อมูลจากไฟล์ CSV</h2>
+        <button onclick="selectAllRows()">เลือกทั้งหมด</button>
+        <button onclick="deselectAllRows()">ยกเลิกการเลือกทั้งหมด</button>
+        <table id="csvTable" border="1">
+            <thead></thead>
+            <tbody></tbody>
+        </table>
+
+    </div>
+
+    <div class="container">
+        <div id="formContainer"></div>
+    </div>
+    <script>const selectAllCheckbox = document.getElementById('selectAll'); // สมมุติว่าคุณมี checkbox สำหรับเลือกทั้งหมด
+        selectAllCheckbox.addEventListener('change', () => {
+            const selectedRows = [...document.querySelectorAll('input[type="checkbox"]:checked')].map(checkbox => {
+                return {
+                    length: checkbox.closest('tr').querySelector('.length').textContent,
+                    width: checkbox.closest('tr').querySelector('.width').textContent,
+                    thickness: checkbox.closest('tr').querySelector('.thickness').textContent,
+                    amount: checkbox.closest('tr').querySelector('.amount').textContent
+                };
+            });
+        
+            console.log("Selected rows:", selectedRows); // ตรวจสอบข้อมูลที่เลือก
+            localStorage.setItem('selectedRows', JSON.stringify(selectedRows)); // บันทึกลง localStorage
+        });
+        </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script src="\backend\app.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
