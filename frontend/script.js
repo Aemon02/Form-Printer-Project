@@ -2,7 +2,8 @@ let selectedRows = []; // เก็บแถวที่เลือก
 
 // ฟังก์ชันโหลดข้อมูลและแสดงในตาราง
 function loadCSVData() {
-    fetch('http://localhost:3200/data')
+    // fetch('http://localhost:3200/data')
+    fetch('https://form-printer-project-backend.vercel.app')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
