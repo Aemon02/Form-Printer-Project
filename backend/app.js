@@ -74,14 +74,14 @@ function processData(data) {
         .filter(row => Object.values(row).some(value => value !== ""))  // Filter out empty rows
         .map(row => {
             // ลบค่า ',,,,ขนาด,,,,'
-            Object.keys(row).forEach(key => {
-                if (row[key] === ',,,,ขนาด,,,,') {
-                    delete row[key];  // ลบค่าไม่จำเป็น
-                }
-            });
+            // Object.keys(row).forEach(key => {
+            //     if (row[key] === ',,,,ขนาด,,,,') {
+            //         delete row[key];  // ลบค่าไม่จำเป็น
+            //     }
+            // });
 
             // ตรวจสอบชื่อคอลัมน์และทำการเปลี่ยนชื่อคอลัมน์ตามที่ต้องการ
-            const englishPart = row["คำอธิบาย (ยาวฟุต*กว้าง*หนา)"] ? extractEnglish(row["คำอธิบาย (ยาวฟุต*กว้าง*หนา)"]) : '';
+            const englishPart = (row["คำอธิบาย (ยาวฟุต*กว้าง*หนา)"] || row["คำอธิบาย(ยาวฟุต*กว้าง*หนา)"]) ? extractEnglish(row["คำอธิบาย (ยาวฟุต*กว้าง*หนา)"] || row["คำอธิบาย(ยาวฟุต*กว้าง*หนา)"])  : '';
 
             return {
                 no: row["No"],
