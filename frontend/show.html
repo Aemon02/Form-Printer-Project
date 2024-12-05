@@ -99,42 +99,43 @@
                         <tr>
                             <td colspan="4" style="width: 100%; padding: 10px; height: 5vw;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                                    <div class="logo" style="text-align: left; font-size: 1em;">
-                                        BUATHONG SIRISUP
-                                    </div>
-                                    <div class="title" style="text-align: center; font-weight: bold; font-size: 2em;">Stock Card</div>
+                                  
+                                    <div><img src="logo.png"></div>
+
+                                    <div class="title" style="text-align: center; font-weight: bold; font-size: 3em;">Stock Card</div>
                                     <div class="product-type" style="text-align: right; font-size: 2em;">ไม้สักแปรรูป</div>
                                 </div>
                             </td>
                         </tr>
                         <tr style="height: 12vw;">
-                            <th style="font-size: 1.5em; width: 25%;">ยาว (ฟุต)</th>
-                            <th style="font-size: 1.5em; width: 25%;">กว้าง (นิ้ว)</th>
-                            <th style="font-size: 1.5em; width: 25%;">หนา (นิ้ว)</th>
-                            <th style="font-size: 1.5em; width: 25%;">จำนวน/แผ่น</th>
+                            <th style="font-size: 2.5em; width: 25%;">ยาว (ฟุต)</th>
+                            <th style="font-size: 2.5em; width: 25%;">กว้าง (นิ้ว)</th>
+                            <th style="font-size: 2.5em; width: 25%;">หนา (นิ้ว)</th>
+                            <th style="font-size: 2.5em; width: 25%;">จำนวน/แผ่น</th>
                         </tr>
                         <tr style="height: 16vw;">
-                            <td style="font-size: 3.5em; font-weight: bold;"><span id="length_detail">${row.length || 'N/A'}</span></td>
-                            <td style="font-size: 3.5em; font-weight: bold;"><span id="width_detail">${row.width || 'N/A'}</span></td>
-                            <td style="font-size: 3.5em; font-weight: bold;"><span id="thickness_detail">${row.thickness || 'N/A'}</span></td>
-                            <td style="font-size: 3.5em; font-weight: bold;"><span id="amount_detail">${row.amount || 'N/A'}</span></td>
+                            <td style="font-size: 6em; font-weight: bold;"><span id="length_detail">${row.length || 'N/A'}</span></td>
+                            <td style="font-size: 6em; font-weight: bold;"><span id="width_detail">${row.width || 'N/A'}</span></td>
+                            <td style="font-size: 6em; font-weight: bold;"><span id="thickness_detail">${row.thickness || 'N/A'}</span></td>
+                            <td style="font-size: 6em; font-weight: bold;"><span id="amount_detail">${row.amount || 'N/A'}</span></td>
                         </tr>
-                        <tr style="height: 17vw;">
+                        <tr style="height: 16vw;">
                             <th rowspan="2">
-                                <div style="font-size: 5em;"><span id="detail_detail">${row.detail || 'N/A'}</span></div>
-                                <div style="font-size: 2em;">เกรด</div>
+                                <div style="font-size: 10em; letter-spacing: -0.05em; line-height: 1;"><span id="detail_detail">${row.detail || 'N/A'}</span></div>
+                                <div style="font-size: 2em; margin-top: -1em;">เกรด</div>
                             </th>
+
                             <td colspan="2" style="text-align: left;">
-                                <div>รหัสสินค้า <span id="code_detail">${row.code || 'N/A'}</span></div>
-                                <div>ชื่อสินค้า <span id="list_detail">${row.list || 'N/A'}</span></div>
+                                <div style="font-size: 1.5em; margin-bottom: 1.5em;">รหัสสินค้า: <span id="code_detail" style="font-weight: bold;">${row.code || 'N/A'}</span></div>
+                                <div style="font-size: 1.5em;">ชื่อสินค้า: <span id="list_detail" style="font-weight: bold;">${row.list || 'N/A'}</span></div>
                             </td>
-                            <td>
-                                <div style="text-align: left;">วันที่ <span id="date_detail">${row.date || 'N/A'}</span></div>
-                                <div style="text-align: left;">location</div>
+                            <td style="text-align: left;">
+                                <div style="font-size: 1.5em; margin-bottom: 1.5em;">วันที่: <span id="date_detail" style="font-weight: bold;">${row.date || 'N/A'}</span></div>
+                                <div style="font-size: 1.5em; ">location:</div>
                             </td>
                         </tr>
                         <tr style="height: 80px;">
-                            <td colspan="3">Barcode <span id="barcode_detail">${row.barcode || 'N/A'}</span></td>
+                            <td colspan="3" style="font-weight: bold;">Barcode <span id="barcode_detail">${row.barcode || 'N/A'}</span></td>
                         </tr>
                     </table>
                 `;
