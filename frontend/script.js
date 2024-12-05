@@ -86,6 +86,7 @@ function toggleRowSelection(rowElement, isSelected) {
     rowData.width = cells[6]?.textContent.trim() || 'N/A';
     rowData.thickness = cells[7]?.textContent.trim() || 'N/A';
     rowData.amount = cells[8]?.textContent.trim() || 'N/A';
+    rowData.date = cells[8]?.textContent.trim() || 'N/A';
 
     // เพิ่มหรือลบแถวที่เลือกจาก selectedRows
     if (isSelected) {

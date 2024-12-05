@@ -91,7 +91,8 @@ function processData(data) {
                 length: row["ยาว (ฟุต)"],
                 width: row["กว้าง (นิ้ว)"],
                 thickness: row["หนา (นิ้ว)"],
-                amount: row["จำนวน/แผ่น"]
+                amount: row["จำนวน/แผ่น"],
+                date: row["วันที่"]
             };
         });
 }
