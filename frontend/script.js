@@ -78,15 +78,15 @@ function toggleRowSelection(rowElement, isSelected) {
     const cells = rowElement.cells;  // ใช้ row.cells แทนการใช้ querySelectorAll
 
     // ดึงข้อมูลจากแต่ละเซลล์ในแถว
-    rowData.no = cells[1]?.textContent.trim() || 'N/A';
-    rowData.code = cells[2]?.textContent.trim() || 'N/A';
-    rowData.list = cells[3]?.textContent.trim() || 'N/A';
-    rowData.detail = cells[4]?.textContent.trim() || 'N/A';
-    rowData.length = cells[5]?.textContent.trim() || 'N/A';
-    rowData.width = cells[6]?.textContent.trim() || 'N/A';
-    rowData.thickness = cells[7]?.textContent.trim() || 'N/A';
-    rowData.amount = cells[8]?.textContent.trim() || 'N/A';
-    rowData.date = cells[8]?.textContent.trim() || 'N/A';
+    rowData.no = cells[1]?.textContent.trim() || ' ';
+    rowData.code = cells[2]?.textContent.trim() || ' ';
+    rowData.list = cells[3]?.textContent.trim() || ' ';
+    rowData.detail = cells[4]?.textContent.trim() || ' ';
+    rowData.length = cells[5]?.textContent.trim() || ' ';
+    rowData.width = cells[6]?.textContent.trim() || ' ';
+    rowData.thickness = cells[7]?.textContent.trim() || ' ';
+    rowData.amount = cells[8]?.textContent.trim() || ' ';
+    rowData.date = cells[9]?.textContent.trim() || ' ';
 
     // เพิ่มหรือลบแถวที่เลือกจาก selectedRows
     if (isSelected) {

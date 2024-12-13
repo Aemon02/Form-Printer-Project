@@ -27,7 +27,7 @@ function uploadFile() {
     const file = fileInput.files[0];
 
     if (!file) {
-        alert('Please select a CSV file first!');
+        alert('กรุณาเลือกไฟล์ CSV');
         return;
     }
 
@@ -57,14 +57,14 @@ function uploadFile() {
                 .then(response => response.json())
                 .then(data => {
                     console.log('Data from server:', data);
-                    alert('File processed and uploaded successfully');
+                    alert('ประมวลผลไฟล์และอัปโหลดสำเร็จแล้ว');
                 })
                 .catch(error => {
                     console.error('Error:', error);
                 });
         },
         error: function (error) {
-            console.error("Error reading file:", error);
+            console.error("เกิดข้อผิดพลาดในการอ่านไฟล์:", error);
         }
     });
 }
@@ -86,13 +86,15 @@ function processData(data) {
             return {
                 no: row["No"],
                 code: row["รหัส"],
-                list: row["รายการ (หนา*กว้าง*ยาวฟุต)"],
+                list: row["รายการ (หนา*กว้าง*ยาวฟุต)"] ||  row["รายการ(หนา*กว้าง*ยาวฟุต)"],
                 detail: englishPart,
                 length: row["ยาว (ฟุต)"],
                 width: row["กว้าง (นิ้ว)"],
                 thickness: row["หนา (นิ้ว)"],
                 amount: row["จำนวน/แผ่น"],
-                date: row["วันที่"]
+                date: row["วันที่"],
+                location: row["location"],
+                barcode: row["barcode"]
             };
         });
 }
